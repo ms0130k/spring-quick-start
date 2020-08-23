@@ -1,4 +1,4 @@
-package com.springbook.biz.ploymorphism;
+package polymorphism;
 
 public class LgTV implements TV{
 

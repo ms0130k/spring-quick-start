@@ -1,4 +1,4 @@
-package com.springbook.test.polymorphism;
+package polymorphism;
 
 public class BeanFactory {
 	public Object getBean(String beanName) {
