@@ -15,9 +15,7 @@ public class TVUser {
 		AbstractApplicationContext factory = new GenericXmlApplicationContext("applicationContext.xml");
 		
 		TV tv = (TV) factory.getBean("tv");
-
-		tv.turnOn();
-		tv.turnOff();
+		tv.volumeUp();
 		
 		factory.close();
 		System.out.println("> end");

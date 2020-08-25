@@ -11,5 +11,10 @@ public class LgTV implements TV{
 	public void turnOff() {
 		System.out.println("turn off Lg");
 	}
-	
+
+	@Override
+	public void volumeUp() {
+		// TODO Auto-generated method stub
+		
+	}
 }
