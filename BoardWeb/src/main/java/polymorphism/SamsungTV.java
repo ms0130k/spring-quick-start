@@ -1,7 +1,13 @@
 package polymorphism;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
+@Component("tv")
 public class SamsungTV implements TV{
 	private String name;
+	@Resource(name = "sonySpeaker")
 	private Speaker speaker;
 	private int price;
 
@@ -24,8 +30,6 @@ public class SamsungTV implements TV{
 	private void destroy() {
 		System.out.println(">> destroy instance");
 	}
-	
-	
 	
 	public String getName() {
 		return name;
@@ -53,6 +57,7 @@ public class SamsungTV implements TV{
 
 	@Override
 	public void volumeUp() {
+		System.out.println(">>> speaker! volume up, please");
 		speaker.volumeUp();
 	}
 	
