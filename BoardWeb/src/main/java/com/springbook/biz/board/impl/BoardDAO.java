@@ -52,4 +52,67 @@ public class BoardDAO {
 			JDBCUtil.close(stmt, conn);
 		}
 	}
+	
+	public void deleteBoard(BoardVO vo) {
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(BOARD_DELETE);
+			stmt.setInt(1, vo.getSeq());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+	}
+	
+	public BoardVO getBoard(BoardVO vo) {
+		BoardVO board = null;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(BOARD_GET);
+			stmt.setInt(1, vo.getSeq());
+			rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				board.setSeq(rs.getInt("seq"));
+				board.setTitle(rs.getString("title"));
+				board.setWriter(rs.getString("writer"));
+				board.setContent(rs.getString("content"));
+				board.setRegDate(rs.getDate("regDate"));
+				board.setCnt(rs.getInt("cnt"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return board;
+	}
+	
+	public List<BoardVO> getBoardList() {
+		List<BoardVO> boardList = new ArrayList<BoardVO>();
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(BOARD_LIST);
+			rs = stmt.executeQuery();
+//			재작성 필요
+			rs.next();
+			BoardVO board = new BoardVO();
+			board.setSeq(rs.getInt("seq"));
+			board.setTitle(rs.getString("title"));
+			board.setWriter(rs.getString("writer"));
+			board.setContent(rs.getString("content"));
+			board.setRegDate(rs.getDate("regDate"));
+			board.setCnt(rs.getInt("cnt"));
+			boardList.add(board);
+//			재작성 필요
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		
+		return boardList;
+	}
 }
