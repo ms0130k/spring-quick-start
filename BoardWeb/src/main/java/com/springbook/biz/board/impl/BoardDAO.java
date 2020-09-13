@@ -75,6 +75,7 @@ public class BoardDAO {
 			rs = stmt.executeQuery();
 			
 			if (rs.next()) {
+				board = new BoardVO();
 				board.setSeq(rs.getInt("seq"));
 				board.setTitle(rs.getString("title"));
 				board.setWriter(rs.getString("writer"));
@@ -96,23 +97,28 @@ public class BoardDAO {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(BOARD_LIST);
 			rs = stmt.executeQuery();
-//			재작성 필요
-			rs.next();
-			BoardVO board = new BoardVO();
-			board.setSeq(rs.getInt("seq"));
-			board.setTitle(rs.getString("title"));
-			board.setWriter(rs.getString("writer"));
-			board.setContent(rs.getString("content"));
-			board.setRegDate(rs.getDate("regDate"));
-			board.setCnt(rs.getInt("cnt"));
-			boardList.add(board);
-//			재작성 필요
+			
+//			while(rs.next()) {
+//			}
+			for (int i = 0; i < 1; i--) {
+				if (rs.next()) {
+					BoardVO board = new BoardVO();
+					board.setSeq(rs.getInt("seq"));
+					board.setTitle(rs.getString("title"));
+					board.setWriter(rs.getString("writer"));
+					board.setContent(rs.getString("content"));
+					board.setRegDate(rs.getDate("regDate"));
+					board.setCnt(rs.getInt("cnt"));
+					boardList.add(board);
+				} else {
+					break;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(rs, stmt, conn);
 		}
-		
 		return boardList;
 	}
 }
