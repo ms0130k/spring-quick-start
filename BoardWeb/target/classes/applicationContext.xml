@@ -78,7 +78,7 @@
 		</property>
 	</bean> -->
 	
-	<context:component-scan base-package="polymorphism" />
+	<!-- <context:component-scan base-package="polymorphism" /> -->
 	
 	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -86,5 +86,12 @@
 		<property name="username" value="root"/>
 		<property name="password" value="ansgjs12)(*&amp;"/>
 	</bean> -->
+	
+	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
+	
+	<bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"/>
+	</bean>
+	<bean id="userDAO" class="com.springbook.biz.user.impl.UserDAO"/>
 	
 </beans>

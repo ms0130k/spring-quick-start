@@ -18,13 +18,13 @@ public class BoardDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	private final String BOARD_INSERT = "INSERT INTO board (seq, title, writer, content) values ((SELECT NVL(MAX(seq), 0) + 1 FROM board), ?, ?, ?)";
+	private final String BOARD_INSERT = "INSERT INTO board (seq, title, writer, content) VALUES ((SELECT IFNULL(MAX(seq), 0) + 1 FROM board AS B), ?, ?, ?)";
 	private final String BOARD_UPDATE = "UPDATE SET board title=?, content=? WHERE seq=?";
 	private final String BOARD_DELETE = "DELETE FROM board WHERE seq=?";
 	private final String BOARD_GET = "SELECT * FROM board WHERE seq=?";
 	private final String BOARD_LIST = "SELECT * FROM board ORDER BY seq DESC";
 	
-	public void insertBaord(BoardVO vo) {
+	public void insertBoard(BoardVO vo) {
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(BOARD_INSERT);

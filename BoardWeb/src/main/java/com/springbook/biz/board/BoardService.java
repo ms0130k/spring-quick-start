@@ -2,11 +2,9 @@ package com.springbook.biz.board;
 
 import java.util.List;
 
-import com.springbook.biz.board.BoardVO;
-
 public interface BoardService {
 
-	void insertBaord(BoardVO vo);
+	void insertBoard(BoardVO vo);
 
 	void updateBoard(BoardVO vo);
 
